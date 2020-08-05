@@ -102,6 +102,16 @@ app
   )
 })
 
+.delete(function(req, res){
+  Article.deleteOne({title: req.params.articleTitle}, function(err){
+    if (!err) {
+      res.send("Article successfully deleted")
+    } else {
+      res.send(err)
+    }
+  })
+})
+
 app.listen(3000, function() {
   console.log("Successfully started the local server");
 });
