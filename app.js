@@ -34,21 +34,31 @@ app.get("/articles", function(req, res) {
 });
 
 // Restful POST route to add a NEW article
-app.post("/articles", function(req, res){
+app.post("/articles", function(req, res) {
   // create new article and save the key values. r
   const newArticle = new Article({
     title: req.body.title,
     content: req.body.content
-  })
+  });
   // Check for err if none, then save article
-  newArticle.save(function(err){
-    if (!err){
-      res.send("Successfully added a new article")
+  newArticle.save(function(err) {
+    if (!err) {
+      res.send("Successfully added a new article");
     } else {
-      res.send(err)
+      res.send(err);
     }
-  })
-})
+  });
+});
+
+app.delete("/articles", function(req, res) {
+  Article.deleteMany(function(err) {
+    if (!err) {
+      res.send("Successfully deleted all articles");
+    } else {
+      res.send(err);
+    }
+  });
+});
 
 app.listen(3000, function() {
   console.log("Successfully started the local server");
